@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+      <div class="center-block">
+          <p class="page-header">
+              are you sure you want to delete <b>{{ object.title }}</b> ?
+          </p>
+          <form class="form-group-lg" method="POST">
+              {% csrf_token %}
+              <input type="submit" class="btn-danger" value="Yes, Delete">
+              <input type="button" onclick="location.href='{% url 'index' %}'"
+                     value="No, Cancel" class="btn-default">
+          </form>
+      </div>
+    </div>
+{% endblock %}

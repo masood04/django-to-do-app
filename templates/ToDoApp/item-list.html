@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div>
+    <div class="text-center">
+        List:
+        <h2>{{ todo_list.title }}</h2>
+    </div>
+      <ul class="list-group">
+          {% for todo in object_list %}
+          <li class="list-group-item">
+              <div>
+                  <h6 class="mb-0">{{ todo.title }} Due ({{ todo.due_date|date:'M, d D' }})</h6>
+                  <p class="mb-0 opacity-75">{{ todo.description|slice:50 }}</p>
+                  <button class="btn-success" type="submit"
+                          onclick="location.href='{% url 'edit-item' todo.id %}'">
+                      Edit
+                  </button>
+
+                  <button class="btn-danger" type="submit"
+                          onclick="location.href='{% url 'delete-item' pk=todo.id list_id=todo_list.id %}'">
+                      Delete
+                  </button>
+              </div>
+          </li>
+              {% empty %}
+              <p>there is no item in this list</p>
+          {% endfor %}
+      </ul>
+        <br><br>
+        <p>
+            <button class="btn-primary" onclick="location.href='{% url 'add-item' todo_list.id %}'">
+                add a new item
+            </button>
+        </p>
+  </div>
+</div>
+
+{% endblock %}

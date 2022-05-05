@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {% for field in form %}
+                <label for="exampleInputEmail1" class="form-label">{{field.label}}</label>
+{#                <input type="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">#}
+                    {{ field }}
+                {% endfor %}
+                <br><br>
+
+                <input type="submit" class="btn-success" value="Save">
+                <input type="submit" class="btn-danger" value="Cancel" onclick="location.href='{% url 'index' %}'">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

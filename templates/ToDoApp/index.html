@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+        {% if object_list %}
+            {% block header %}All My List{% endblock %}
+        {% endif %}
+
+        <div class="list-group">
+            {% for todo in object_list %}
+                <a href="{% url 'list' todo.id %}" class="list-group-item list-group-item-action d-flex gap-3 py-3"
+                   aria-current="true">
+
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <h6 class="mb-0">{{ todo.title }}</h6>
+                        </div>
+
+
+                    </div>
+                </a>
+                <div>
+                    <button onclick="location.href='{% url 'edit-list' todo.id %}'"
+                            class="btn-default">Edit
+                    </button>
+                    <button onclick="location.href='{% url 'delete-list' todo.id %}'"
+                            class="btn-danger">Delete
+                    </button>
+                </div>
+                <br><br>
+            {% empty %}
+                <p>no list available for you</p>
+            {% endfor %}
+
+        </div>
+        <br><br>
+
+        <button class="btn-primary" onclick="location.href='{% url 'add-list' %}'">
+            add list
+        </button>
+
+
+    </div>
+
+
+
+{% endblock %}
